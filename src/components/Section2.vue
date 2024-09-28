@@ -53,6 +53,7 @@ h1{
 }
 
 .icons{
+
   text-align: center;
   padding-top: 50px;
   display: flex;
@@ -63,6 +64,7 @@ h1{
 .wrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 100px;
 }
 .spanTitle{
   font-weight: bold;
