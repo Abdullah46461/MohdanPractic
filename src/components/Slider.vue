@@ -1,6 +1,6 @@
 <template>
   <div>
-<img :src='showImg()'  />
+<img :src='showImg'  />
   </div>
 </template>
 
@@ -13,20 +13,15 @@ export default {
     }
   },
   props: ['img', 'slideItem'],
-computed:{
+  computed:{
 
-  ...mapState(['slide']),
-},
-mounted() {
-    console.log(this.img);
-},
-  methods:{
-    showImg(){
-     const otv = this.slide.find((item) => item.id === this.slideItem);
-     return otv.img;
+    ...mapState(['slide']),
 
+    showImg() {
+      const otv = this.slide.find((item) => item.id === this.slideItem);
+      return otv.img;
     }
-  }
+  },
 }
 </script>
 

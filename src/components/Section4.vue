@@ -8,7 +8,6 @@
   :img="item"
   class="item"
           :slideItem="slideItem"
-          :style1="`margin-left: ${100 * slideItem}%`"
   />
   </div>
     <button @click="imgSlideNext">+</button>
@@ -65,6 +64,8 @@ components:
   padding-top: 50px;
   display: flex;
   justify-content: center;
+  background-color: white;
+
 }
 button{
 

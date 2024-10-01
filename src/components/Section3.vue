@@ -8,21 +8,27 @@
       <h2>
         Просто заполните форму заявки <br>и мы перезвоним вам в течении 10 минут
       </h2>
-
+<Modal
+></Modal>
     </div>
     <div class="input">
-      <input type="text" placeholder="Ваше имя" v-model="inp1" @click ="input1">
-        <h2 v-if="flag1">Введите имя</h2>
-      <input type="text" placeholder="Ваш телефон" v-model="inp2">
-      <input type="text" placeholder="Ваш E-mail" v-model="inp3">
+      <input type="text" placeholder="Ваше имя" v-model="inp1" @keydown.enter="name"/>
+        <h2 v-if="nameFlag">Введите имя</h2>
+      <input type="text" placeholder="Ваш телефон" v-model="inp2" @keydown.enter="phone"/>
+      <h2 v-if="nameFlag2">Номер введен не корректно</h2>
+      <input type="text" placeholder="Ваш E-mail" v-model="inp3" @keydown.enter="email"/>
+      <h2 v-if="nameFlag3">Email введен не корректно</h2>
+
     </div>
-    <Button class="btn"><vslot>КОНСУЛЬТАЦИЮ</vslot></Button>
+    <Button class="btn" @click="createModal"><vslot >КОНСУЛЬТАЦИЮ</vslot></Button>
   </div>
   </section>
 </template>
 
 <script>
 import Button from '@/components/Button.vue'
+import { mapMutations } from 'vuex'
+// import Modal from '@/components/Modal.vue'
 export default {
   components: { Button },
   data(){
@@ -30,16 +36,37 @@ export default {
       inp1: '',
       inp2: '',
       inp3: '',
-      flag1: '',
+      nameFlag: false,
+      nameFlag2: false,
+      nameFlag3: false,
     }
   },
   methods:{
-    input1(){
-      if(!this.inp1){
-        this.flag1 = false
+    ...mapMutations(['createModal']),
+    name(){
+      if(this.inp1 === '' ){
+        this.nameFlag = true
+      }else{
+        this.nameFlag = false
       }
-    }
-
+    },
+    phone(){
+      const phoneRegex = /^\+?[78][-(]?\d{3}\)?[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$/;
+      if(this.inp2 === '' || !phoneRegex.test(this.inp2)){
+        this.nameFlag2 = true
+        console.log(this.nameFlag2)
+        console.log( typeof this.inp2)
+      }else {
+        this.nameFlag2 = false
+      }
+    },
+  email(){
+      if(this.inp3 === '' || this.inp3.slice(-8) !== '@mail.ru') {
+        this.nameFlag3 = true
+      } else {
+        this.nameFlag3 = false
+      }
+  }
   }
 
 }

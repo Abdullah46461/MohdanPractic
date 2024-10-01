@@ -5,7 +5,8 @@
         <img src="./icons/logo.png" height="45" width="251" alt="aj"/>
          <div class="headerButton">
            <h2>+7(499) 922-89-09</h2>
-           <Button/>
+           <Button @click="createModal" />
+           <Modal />
          </div>
       </header>
 
@@ -24,9 +25,11 @@
           <span>Бесплатная <br>доставка</span>
           <span>Ответим на все <br> вопросы</span>
         </div>
-          <div class="btn"><Button class="consult"><template v-slot>КОНСУЛЬТАЦИЮ</template></Button></div>
+          <div class="btn">
+            <Button class="consult" @click="createModal" ><template v-slot>КОНСУЛЬТАЦИЮ</template></Button>
+          </div>
         <div class="scrol">
-          <a href="#section1">или ПЕРЕЙТИ В КАТАЛОГ</a>
+          <a href="#section4">или ПЕРЕЙТИ В КАТАЛОГ</a>
         </div>
       </div>
     </div>
@@ -35,8 +38,27 @@
 
 <script>
 import Button from '@/components/Button.vue'
+import Modal from '@/components/Modal.vue'
+import { mapState, mapMutations } from 'vuex'
 export default {
-  components: { Button }
+  data(){
+    return{
+      // modal: false,
+    }
+  },
+  computed: {
+    ...mapState(['modal']),
+      // ...mapMutations(['createModal'])
+
+  },
+  methods: {
+    ...mapMutations(['createModal'])
+  },
+  mounted() {
+    console.log(this.modal)
+  },
+
+  components: { Modal, Button }
 
 }
 </script>
@@ -99,5 +121,8 @@ section {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+}
+html {
+  scroll-behavior: smooth;
 }
 </style>
